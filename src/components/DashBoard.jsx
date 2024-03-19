@@ -1,7 +1,7 @@
 import React from "react";
 import Cards from "./Cards";
 
-function DashBoard() {
+function DashBoard({user,setUser}) {
   let data = [
     {
       title: "EARNINGS (MONTHLY)",
@@ -45,6 +45,38 @@ function DashBoard() {
                 return <Cards cardData={e} />;
               })}
             </div>
+            <div className="row">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Batch</th>
+                        <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {
+                            user.map((e,i)=>{
+                                return <tr key={e.id}>
+                                    <td>{e.id}</td>
+                                    <td>{e.name}</td>
+                                    <td>{e.email}</td>
+                                    <td>{e.mobile}</td>
+                                    <td>{e.batch}</td>
+                                    <td>
+                                        <Button variant='primary' onClick={()=>navigate(`/edit-user/${e.id}`)}>Edit</Button>
+                                        &nbsp;
+                                        <Button variant='danger' onClick={()=>{handleDelete(e.id)}}>Delete</Button>
+                                    </td>
+                                </tr>
+                            })
+                       }
+                    </tbody>
+                </Table>
+                </div>
           </div>
         </div>
       </div>
